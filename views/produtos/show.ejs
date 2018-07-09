@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-br">
+    <% include ../header %>
+    <body class="">
+        <div class="wrapper ">
+            <div class="sidebar" data-color="purple" data-background-color="white">
+                <!--
+                  Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+          
+                  Tip 2: you can also add an image using data-image tag
+                -->
+                <div class="logo">
+                    <a href="" class="simple-text logo-normal">
+                        Cart - Lista de compras
+                    </a>
+                </div>
+                <div class="sidebar-wrapper">
+                    <ul class="nav">
+                        <li class="nav-item active  ">
+                            <a class="nav-link" href="produtos">
+                                <i class="material-icons">add_shopping_cart</i>
+                                <p>Cadastro de Produtos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active  ">
+                            <a class="nav-link" href="lista">
+                                <i class="material-icons">art_track</i>
+                                <p>Lista de compras</p>
+                            </a>
+                        </li>
+                        <!-- your sidebar here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="main-panel">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <a class="navbar-brand" href="#produto">Lista de compras</a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="container">  
+                           
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th> </th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% produtos.forEach(function(produto, index) { %>
+                                    <form action="/produto/<%- produto._id %>?_method=DELETE" method="post"> 
+                                    <tr>
+                                        <td><%- produto.descricao %></td>
+                                        <td><%- produto.quantidade %></td>
+                                        <td><a href="/produto/<%- produto._id %>/editar"><button type="button" class="btn btn-success">Editar</button></a></td>
+                                        <td><button type="submit" class="btn btn-danger">Excluir</button></td>                                
+                                    </tr>
+                                    </form>
+                                    <% }) %>                                    
+
+                                </tbody>
+                            </table>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
