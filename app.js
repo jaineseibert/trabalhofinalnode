@@ -1,3 +1,4 @@
+const path = require('path');
 var express = require('express')
 	, load = require('consign')
 	, cookieParser = require('cookie-parser')
@@ -20,8 +21,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + '/views')));
 
 mongoose.connect('mongodb://trabalhonode:trabalhonode18@ds227821.mlab.com:27821/cart_lista_de_compras');
 global.db = mongoose.connection;
@@ -36,8 +37,4 @@ app.use(error.notFound);
 // Executa ao ocorrer um erro
 app.use(error.serverError);
 
-
-
-app.listen(3000, function () {
-	console.log("Lista de compras no ar.");
-});
+app.listen(process.env.PORT || 3000, () => console.log(`Listening on ${ process.env.PORT || 3000 }`))
